@@ -9,10 +9,12 @@ export class UserService {
     constructor(
         @InjectRepository(User)
         private userRepository: Repository<User>,
-        private connection: Connection,
     ) {}
 
     public async findOneByLogin(login: string) {
+        console.log(await this.userRepository.find());
+        console.log(await this.userRepository.findOne({ where: { login: 'test1' } }));
+
         return this.userRepository.findOne({
             where: { login },
         });
@@ -25,5 +27,9 @@ export class UserService {
         user.password = data.password;
 
         await this.userRepository.save(user);
+    }
+
+    public async updateOne(id, data) {
+        await this.userRepository.update({ id }, data);
     }
 }
