@@ -7,12 +7,11 @@ import { PulseModule } from './pulse/pulse.module';
 import { RegistrationModule } from './registration/registration.module';
 import { AuthModule } from './auth/auth.module';
 import { PayModule } from './pay/pay.module';
-import { UsersModule } from './users/users.module';
+import { UserModule } from './user/user.module';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
-import { UsersService } from './users/users.service';
 
 @Module({
     imports: [
@@ -22,7 +21,7 @@ import { UsersService } from './users/users.service';
         RegistrationModule,
         AuthModule,
         PayModule,
-        UsersModule,
+        UserModule,
         TypeOrmModule.forRoot({
             type: 'postgres',
             host: 'localhost',
@@ -30,7 +29,7 @@ import { UsersService } from './users/users.service';
             synchronize: true,
         }),
     ],
-    exports: [UsersModule],
+    exports: [UserModule],
     controllers: [AppController],
     providers: [
         AppService,

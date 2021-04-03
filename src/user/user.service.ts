@@ -1,29 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Users } from './users.entity';
+import { User } from './user.entity';
 import { Connection, Repository } from 'typeorm';
 import { RegistrationDto } from '../registration/registration.dto';
 
 @Injectable()
-export class UsersService {
+export class UserService {
     constructor(
-        @InjectRepository(Users)
-        private usersRepository: Repository<Users>,
+        @InjectRepository(User)
+        private userRepository: Repository<User>,
         private connection: Connection,
     ) {}
 
     public async findOneByLogin(login: string) {
-        return this.usersRepository.findOne({
+        return this.userRepository.findOne({
             where: { login },
         });
     }
 
     public async register(data: RegistrationDto) {
-        const user = new Users();
+        const user = new User();
 
         user.login = data.login;
         user.password = data.password;
 
-        await this.usersRepository.save(user);
+        await this.userRepository.save(user);
     }
 }
