@@ -12,6 +12,7 @@ async function bootstrap() {
         .setTitle('Api')
         .setDescription('Full api docs. Yes, it`s open.')
         .setVersion('1.0')
+        .addBearerAuth()
         .build();
     const documentation = SwaggerModule.createDocument(app, swaggerConfig);
 
